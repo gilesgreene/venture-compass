@@ -17,5 +17,16 @@ export const postType = {
       type: 'array',
       of: [{ type: 'block' }],
     },
+
+    {
+      name: 'authorName',
+      title: 'Author Name',
+      type: 'string',
+    },
+    {
+      name: 'authorRole',
+      title: 'Author Identifier (e.g., Lead Researcher)',
+      type: 'string',
+    }
   ],
 }
