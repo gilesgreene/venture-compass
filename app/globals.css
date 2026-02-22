@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-vc-beige: #F2E8DF;
+  --color-vc-navy: #1B365D;
+}
+
+body {
+  background-color: var(--color-vc-beige);
+  color: var(--color-vc-navy);
+  font-family: ui-serif, Georgia, serif;
+}
+
+.prose {
+  line-height: 1.8;
+  letter-spacing: -0.01em;
+}
