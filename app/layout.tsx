@@ -6,6 +6,12 @@ import "./globals.css";
 export const metadata: Metadata = {
   title: "The Venture Compass",
   description: "Navigating the venture landscape",
+  openGraph: {
+    title: "The Venture Compass",
+    description: "Navigating the venture landscape",
+    // This uses the non-transparent beige version for social links
+    images: ["/venture-compass-logo.png"],
+  },
 };
 
 export default function RootLayout({
@@ -19,10 +25,10 @@ export default function RootLayout({
         <header className="w-full border-b border-vc-navy/10 bg-vc-beige/80 backdrop-blur-md sticky top-0 z-50">
           <div className="max-w-6xl mx-auto px-6 py-4 flex items-center">
             <Link href="/" className="flex items-center gap-6 group">
-              {/* Larger Logo */}
               <div className="w-20 h-20 relative">
                 <Image 
-                  src="/venture-compass-logo.png" 
+                  // This uses the transparent version for the website UI
+                  src="/venture-compass-logo-transparent.png" 
                   alt="The Venture Compass Logo" 
                   fill 
                   className="object-contain transition-transform group-hover:scale-105"
