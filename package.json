@@ -14,6 +14,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "autoprefixer": "^10.4.24",
     "gray-matter": "^4.0.3",
+    "lucide-react": "^0.575.0",
     "next": "16.1.6",
     "next-mdx-remote": "^6.0.0",
     "next-sanity": "^11.6.12",

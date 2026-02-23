@@ -15,7 +15,20 @@ export const postType = {
     {
       name: 'body',
       type: 'array',
-      of: [{ type: 'block' }],
+      of: [
+        { type: 'block' }, // This handles the text/headings
+        {
+          type: 'image',
+          options: { hotspot: true }, // Allows you to crop inside the Studio
+          fields: [
+            {
+              name: 'alt',
+              type: 'string',
+              title: 'Alternative Text',
+            }
+          ]
+        }
+      ]
     },
 
     {
