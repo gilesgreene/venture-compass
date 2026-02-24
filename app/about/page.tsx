@@ -6,8 +6,8 @@ const TEAM = [
     name: "Giles Greene",
     role: "Co-Founder & Editor",
     // 1. Using backticks (``) to allow physical line breaks in the code
-    bio: `Focused on early-stage fintech and infrastructure. 
-
+    bio: `Specializing on Fintech and Digital Payment Infrastructure. 
+Student @ The University of Florida
 R&D Intern @ The Federal Reserve of Boston.
 Incoming @ Capital One.
 Previously @ Deutsche Bank.`, 
@@ -20,9 +20,11 @@ Previously @ Deutsche Bank.`,
   {
     name: "Lucas Caicedo",
     role: "Co-Founder & Analyst",
-    bio: `Specializing in Healthcare and Industrials. 
-
-Incoming @ J.P. Morgan.`,
+    bio: `Specializing in Life Sciences & Disruptive Tech. 
+Student @ The George Washington University
+Digital Asset & Blockhain Policy Intern @ The Digital Chamber
+Incoming @ J.P. Morgan.
+Previously @ InspereX.`, 
     image: "/friend-photo.jpg",
     socials: {
       linkedin: "https://www.linkedin.com/in/l-caicedo/",

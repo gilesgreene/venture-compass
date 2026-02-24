@@ -1,46 +1,90 @@
-import Link from 'next/link';
-import { client } from '../../sanity/lib/client';
+import Image from "next/image";
+import Link from "next/link";
+import { createClient } from "next-sanity";
+import imageUrlBuilder from "@sanity/image-url";
 
-export default async function Home() {
-  const posts = await client.fetch(`*[_type == "post"] | order(_createdAt desc) {
+// 1. Sanity Configuration
+const client = createClient({
+  projectId: "43zfx56t", // Find this in your sanity.config.ts or sanity manage
+  dataset: "production",
+  apiVersion: "2023-01-01",
+  useCdn: false, // Set to false to see updates immediately without caching
+});
+
+const builder = imageUrlBuilder(client);
+function urlFor(source: any) {
+  return builder.image(source);
+}
+
+export default async function JournalPage() {
+  // 2. Fetch posts from Sanity (replaces the hard-coded POSTS array)
+  const posts = await client.fetch(`*[_type == "post"] | order(date desc) {
     title,
     "slug": slug.current,
-    "excerpt": array::join(string::split(pt::text(body), "")[0..200], "") + "...",
-    _createdAt,
-    authorName,
-    authorRole
+    date,
+    category,
+    excerpt,
+    mainImage
   }`);
 
   return (
-    <main className="p-10 max-w-5xl mx-auto">
-      <div className="flex flex-col gap-12">
+    <div className="space-y-16 py-8">
+      <header className="mb-12 border-b border-vc-navy/10 pb-8">
+        <h1 className="text-4xl font-serif font-bold text-vc-navy uppercase tracking-tighter">
+          Journal
+        </h1>
+      </header>
+
+      <div className="flex flex-col gap-16">
         {posts.map((post: any) => (
-          <Link key={post.slug} href={`/blog/${post.slug}`} className="group">
-            <article className="cursor-pointer">
-              {/* Navy Blue Author Info */}
-              {(post.authorName || post.authorRole) && (
-                <p className="text-sm font-bold text-[#001f3f] mb-1 uppercase tracking-tight">
-                  {post.authorName} {post.authorRole && <span className="opacity-70 font-medium">| {post.authorRole}</span>}
+          <Link key={post.slug} href={`/blog/${post.slug}`} className="group block">
+            <article className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center">
+              
+              {/* Image Container */}
+              <div className="md:col-span-5 relative aspect-[4/3] overflow-hidden rounded-2xl border border-vc-navy/5 bg-vc-beige shadow-sm">
+                {post.mainImage ? (
+                  <Image
+                    src={urlFor(post.mainImage).width(800).url()}
+                    alt={post.title}
+                    fill
+                    className="object-cover transition-transform duration-700 group-hover:scale-105"
+                    sizes="(max-width: 768px) 100vw, 40vw"
+                  />
+                ) : (
+                  // Fallback if you forgot to upload an image in Sanity
+                  <div className="w-full h-full bg-vc-navy/5 flex items-center justify-center text-vc-navy/20">
+                    No Image
+                  </div>
+                )}
+              </div>
+
+              {/* Text Content */}
+              <div className="md:col-span-7 space-y-3">
+                <div className="flex items-center gap-2 capitalize text-sm text-gray-400 mb-2">
+                  <span>{post.date ? new Date(post.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : 'Draft'}</span>
+                  <span className="w-1 h-1 rounded-full bg-vc-navy/20" />
+                  <span>{post.category || 'General'}</span>
+                </div>
+                
+                <h2 className="text-2xl md:text-3xl font-serif font-bold text-vc-navy group-hover:text-blue-800 transition-colors tracking-tight">
+                  {post.title}
+                </h2>
+                
+                <p className="text-vc-navy/60 leading-relaxed text-sm md:text-base line-clamp-3">
+                  {post.excerpt}
                 </p>
-              )}
-              
-              {/* Date (Back to the original gray style) */}
-              <p className="text-xs text-gray-400 mb-2">
-                {new Date(post._createdAt).toLocaleDateString('en-US', {
-                  month: 'long', day: 'numeric', year: 'numeric'
-                })}
-              </p>
-              
-              <h2 className="text-3xl font-bold group-hover:underline mb-3 text-gray-900">
-                {post.title}
-              </h2>
-              <p className="text-gray-600 leading-relaxed max-w-2xl">
-                {post.excerpt}
-              </p>
+                
+                <div className="pt-2">
+                  <span className="text-[10px] font-black uppercase tracking-widest text-vc-navy border-b-2 border-vc-navy/10 group-hover:border-blue-800 transition-all">
+                    Read Article →
+                  </span>
+                </div>
+              </div>
+
             </article>
           </Link>
         ))}
       </div>
-    </main>
+    </div>
   );
 }

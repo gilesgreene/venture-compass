@@ -45,15 +45,19 @@ export default function RootLayout({
               >
                 Journal
               </Link>
+
+              {/* Commented out Signal Tracker
               <Link 
                 href="/tracker" 
                 className="text-sm font-bold uppercase tracking-widest hover:text-blue-800 transition-colors border-x border-vc-navy/10 px-6"
               >
                 Signal Tracker
-              </Link>
+              </Link> 
+              */}
+              
               <Link 
                 href="/about" 
-                className="text-sm font-bold uppercase tracking-widest hover:text-blue-800 transition-colors"
+                className="text-sm font-bold uppercase tracking-widest hover:text-blue-800 transition-colors border-l border-vc-navy/10 pl-8"
               >
                 About
               </Link>
@@ -92,6 +96,7 @@ export default function RootLayout({
                 <div className="w-64 h-[1px] bg-vc-navy/10" />
               </div>
 
+              {/* Commented out Signal Tracker for Mobile
               <Link 
                 href="/tracker" 
                 onClick={toggleMenu} 
@@ -103,6 +108,7 @@ export default function RootLayout({
               <div className="flex justify-center">
                 <div className="w-64 h-[1px] bg-vc-navy/10" />
               </div>
+              */}
 
               <Link 
                 href="/about" 
