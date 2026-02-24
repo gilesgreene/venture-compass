@@ -1,3 +1,4 @@
+export const revalidate = 10; // Re-check for new posts every 10 seconds
 import Image from "next/image";
 import Link from "next/link";
 import { createClient } from "next-sanity";
