@@ -43,7 +43,7 @@ export default async function AdminDashboard() {
           <h2 className="text-sm font-bold uppercase tracking-[0.2em] text-vc-navy/40 mb-6">Recent Articles</h2>
           
           {posts && posts.length > 0 ? (
-            posts.map((post) => (
+            posts.map((post: any) => (
               <div 
                 key={post.id}
                 className="group bg-white/40 border border-vc-navy/5 p-6 rounded-2xl flex items-center justify-between hover:bg-white/80 transition-all hover:shadow-xl hover:shadow-vc-navy/5"
